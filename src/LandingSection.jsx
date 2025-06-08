@@ -242,9 +242,16 @@ export default function LandingSection() {
             className="flex items-center text-white text-s font-normal transition-colors duration-200 hover:text-gray-300 cursor-pointer bg-transparent border-none outline-none pointer-events-auto"
             style={{ padding: 0, background: "none" }}
           >
-            Start a project
+            <motion.span
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.5, duration: 0.4, type: "spring" }}
+              className="mr-1"
+            >
+              Start a project
+            </motion.span>
             <svg
-              className="ml-1 w-4 h-4 mt-1.5"
+              className="w-4 h-4 mt-1.5"
               fill="none"
               stroke="currentColor"
               strokeWidth="1.5"
