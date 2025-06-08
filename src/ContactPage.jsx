@@ -1,14 +1,17 @@
 import React from "react";
 
 export default function ContactPage({ onClose }) {
+  // Detect if rendered as a modal (with onClose) or as a page (no onClose)
+  const isModal = typeof onClose === "function";
+
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-[#ededed]">
+    <div className={isModal ? "fixed inset-0 z-50 flex items-center justify-center bg-[#ededed]" : "min-h-screen flex items-center justify-center bg-[black] px-4 py-12"}>
       {/* Modal container */}
       <div className="flex w-full max-w-5xl h-[80vh] bg-white rounded-lg shadow-2xl overflow-hidden relative">
-        {/* Left: Image instead of spheres */}
-        <div className="flex-1 flex items-center justify-center bg-[#ededed]">
+        {/* Left: Image */}
+        <div className="flex-1 flex items-center justify-center bg-[black]">
           <img
-            src="/public/contact.jpg"
+            src="/contact.jpg"
             alt="Contact Visual"
             className="object-cover rounded-xl shadow-2xl w-[380px] h-[550px]"
             style={{ background: "#ededed" }}
@@ -16,14 +19,16 @@ export default function ContactPage({ onClose }) {
         </div>
         {/* Right: Form */}
         <div className="flex-1 flex flex-col justify-center px-12 py-10 bg-white relative">
-          {/* Close button */}
-          <button
-            onClick={onClose}
-            className="absolute top-6 right-6 text-gray-400 hover:text-black text-2xl focus:outline-none"
-            aria-label="Close"
-          >
-            &times;
-          </button>
+          {/* Close button only if modal */}
+          {isModal && (
+            <button
+              onClick={onClose}
+              className="absolute top-6 right-6 text-gray-400 hover:text-black text-2xl focus:outline-none"
+              aria-label="Close"
+            >
+              &times;
+            </button>
+          )}
           {/* Heading */}
           <h1 className="text-5xl font-black tracking-tight mb-8" style={{ fontFamily: "Oswald, sans-serif" }}>
             Let's get in touch
@@ -59,7 +64,6 @@ export default function ContactPage({ onClose }) {
               Send message
             </button>
           </form>
-          
         </div>
       </div>
     </div>

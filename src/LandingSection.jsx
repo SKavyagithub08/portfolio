@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState, useRef, useCallback } from "react";
 import { motion } from "framer-motion";
 import { NavLink, useNavigate } from "react-router-dom";
 import AboutPage from "./AboutPage";
@@ -12,6 +12,160 @@ const socials = [
   { icon: <FaEnvelope />, url: "mailto:kavyasri2330@gmail.com", label: "Email" },
 ];
 
+// High-speed molecular animated background for home black area only
+function FastMolecularBgHome() {
+  const canvasRef = useRef(null);
+  const animationRef = useRef();
+  const mouse = useRef({ x: null, y: null });
+  const PARTICLE_COUNT =100;
+  const SPEED = 0;
+  const SENSITIVITY = 0.32;
+  const LINE_DIST = 0;
+  const PARTICLE_RADIUS = 2.5;
+
+  // Generate initial particles
+  const createParticles = useCallback((w, h) => {
+    return Array.from({ length: PARTICLE_COUNT }).map(() => ({
+      x: Math.random() * w,
+      y: Math.random() * h,
+      vx: (Math.random() - 0.5) * SPEED * 2,
+      vy: (Math.random() - 0.5) * SPEED * 2,
+    }));
+  }, []);
+
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    // Get the parent section's size (the black area)
+    const parent = canvas.parentElement;
+    let w = parent.offsetWidth;
+    let h = parent.offsetHeight;
+    canvas.width = w;
+    canvas.height = h;
+
+    let particles = createParticles(w, h);
+
+    function resize() {
+      w = parent.offsetWidth;
+      h = parent.offsetHeight;
+      canvas.width = w;
+      canvas.height = h;
+      // Keep the same particles but reposition if out of bounds
+      for (let p of particles) {
+        p.x = Math.max(0, Math.min(w, p.x));
+        p.y = Math.max(0, Math.min(h, p.y));
+      }
+    }
+
+    window.addEventListener("resize", resize);
+
+    function animate() {
+      const ctx = canvas.getContext("2d");
+      ctx.clearRect(0, 0, w, h);
+
+      // Draw lines first (so particles are on top)
+      for (let i = 0; i < particles.length; i++) {
+        for (let j = i + 1; j < particles.length; j++) {
+          const p1 = particles[i];
+          const p2 = particles[j];
+          const dx = p1.x - p2.x;
+          const dy = p1.y - p2.y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          if (dist < LINE_DIST) {
+            ctx.beginPath();
+            ctx.moveTo(p1.x, p1.y);
+            ctx.lineTo(p2.x, p2.y);
+            ctx.strokeStyle = "rgba(255,255,255," + (1 - dist / LINE_DIST) * 0.7 + ")";
+            ctx.lineWidth = 1.2;
+            ctx.globalAlpha = 0.7;
+            ctx.stroke();
+            ctx.globalAlpha = 1;
+          }
+        }
+      }
+
+      // Move and draw particles
+      for (let i = 0; i < particles.length; i++) {
+        let p = particles[i];
+
+        // Mouse ripple effect (relative to canvas)
+        if (mouse.current.x !== null && mouse.current.y !== null) {
+          const dx = p.x - mouse.current.x;
+          const dy = p.y - mouse.current.y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          if (dist < 120 && dist > 0.1) {
+            const force = (120 - dist) / 120 * SENSITIVITY * 18;
+            p.vx += (dx / dist) * force;
+            p.vy += (dy / dist) * force;
+          }
+        }
+
+        // Move
+        p.x += p.vx;
+        p.y += p.vy;
+
+        // Friction to prevent runaway
+        p.vx *= 0.96;
+        p.vy *= 0.96;
+
+        // Bounce off edges
+        if (p.x < 0) { p.x = 0; p.vx *= -1; }
+        if (p.x > w) { p.x = w; p.vx *= -1; }
+        if (p.y < 0) { p.y = 0; p.vy *= -1; }
+        if (p.y > h) { p.y = h; p.vy *= -1; }
+
+        // Draw particle (draw after lines for visibility)
+        ctx.save();
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, PARTICLE_RADIUS, 0, 2 * Math.PI);
+        ctx.fillStyle = "rgba(145, 138, 138, 0.8)";
+        ctx.shadowColor = "rgba(145, 138, 138, 0.8)";
+        ctx.shadowBlur = 10;
+        ctx.globalAlpha = 1;
+        ctx.fill();
+        ctx.shadowBlur = 0;
+        ctx.globalAlpha = 1;
+        ctx.restore();
+      }
+
+      animationRef.current = requestAnimationFrame(animate);
+    }
+
+    animate();
+
+    // Mouse move relative to canvas
+    function handleMouseMove(e) {
+      const rect = canvas.getBoundingClientRect();
+      mouse.current.x = e.clientX - rect.left;
+      mouse.current.y = e.clientY - rect.top;
+    }
+    function handleMouseLeave() {
+      mouse.current.x = null;
+      mouse.current.y = null;
+    }
+
+    // pointer-events-auto so canvas gets mouse events
+    canvas.addEventListener("mousemove", handleMouseMove);
+    canvas.addEventListener("mouseleave", handleMouseLeave);
+
+    return () => {
+      window.removeEventListener("resize", resize);
+      canvas.removeEventListener("mousemove", handleMouseMove);
+      canvas.removeEventListener("mouseleave", handleMouseLeave);
+      cancelAnimationFrame(animationRef.current);
+    };
+  }, [createParticles]);
+
+  return (
+    <canvas
+      ref={canvasRef}
+      className="absolute inset-0 w-full h-full z-0 pointer-events-auto"
+      style={{ background: "transparent" }}
+      aria-hidden="true"
+    />
+  );
+}
+
 export default function LandingSection() {
   const name = "kavya";
   const [visibleCount, setVisibleCount] = useState(0);
@@ -21,6 +175,12 @@ export default function LandingSection() {
   const aboutRef = useRef(null);
   const projectsRef = useRef(null);
   const navigate = useNavigate();
+
+  // Remove duplicate handleStartProject
+  const handleStartProject = (e) => {
+    e.preventDefault();
+    navigate("/contact");
+  };
 
   // Animate the main "kavya" letter by letter
   useEffect(() => {
@@ -52,9 +212,9 @@ export default function LandingSection() {
   return (
     <>
       {/* Landing Section: Half viewport height */}
-      <section className="min-h-[85vh] h-[85vh] bg-black text-white flex flex-col relative">
-        {/* Top bar */}
-        {/* REMOVE: duplicate nav, handled by Navbar */}
+      <section className="min-h-[85vh] h-[85vh] bg-black text-white flex flex-col relative overflow-hidden">
+        {/* Molecular animation only in this black area */}
+        <FastMolecularBgHome />
         {/* Main identity row at bottom */}
         <div className="flex items-end justify-between w-full px-8 pb-[10vh] flex-1">
           <div>
@@ -76,7 +236,7 @@ export default function LandingSection() {
               ))}
             </h1>
             <motion.span
-              className="text-xl text-gray-400 font-sans mt-1 block"
+              className="text-xl text-gray-400 font-sans mt-1 ml-2 block"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.5, duration: 0.4, type: "spring" }}
@@ -84,12 +244,14 @@ export default function LandingSection() {
               Full Stack Developer & Designer
             </motion.span>
           </div>
-          <motion.a
-            href="#contact"
-            className="flex items-center text-white text-s font-normal transition-colors duration-200 hover:text-gray-300"
+          <motion.button
+            type="button"
+            onClick={handleStartProject}
+            className="flex items-center text-white text-s font-normal transition-colors duration-200 hover:text-gray-300 cursor-pointer bg-transparent border-none outline-none"
             initial={{ opacity: 0, x: 30 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.5, duration: 0.4, type: "spring" }}
+            style={{ padding: 0 }}
           >
             Start a project
             <svg
@@ -106,7 +268,7 @@ export default function LandingSection() {
                 d="M5 19L19 5M19 5v8m0-8h-8"
               />
             </svg>
-          </motion.a>
+          </motion.button>
         </div>
         {/* Scroll icon/visual in the middle bottom */}
         <div className="absolute left-1/2 bottom-8 transform -translate-x-1/2 z-30 flex flex-col items-center pointer-events-none select-none">

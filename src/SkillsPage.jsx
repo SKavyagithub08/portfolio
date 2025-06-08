@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { FaGithub, FaLinkedin, FaEnvelope } from "react-icons/fa";
 
@@ -193,6 +193,149 @@ function MolecularBg() {
   );
 }
 
+// High-speed molecular animated background using HTML canvas
+function FastMolecularBg() {
+  const canvasRef = useRef(null);
+  const animationRef = useRef();
+  const mouse = useRef({ x: null, y: null });
+  const PARTICLE_COUNT = 70;
+  const SPEED = 2;
+  const SENSITIVITY = 0.32;
+  const LINE_DIST = 140;
+  const PARTICLE_RADIUS = 2.5; // Increased for better visibility
+
+  // Generate initial particles
+  const createParticles = useCallback((w, h) => {
+    return Array.from({ length: PARTICLE_COUNT }).map(() => ({
+      x: Math.random() * w,
+      y: Math.random() * h,
+      vx: (Math.random() - 0.5) * SPEED * 2,
+      vy: (Math.random() - 0.5) * SPEED * 2,
+    }));
+  }, []);
+
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    let w = window.innerWidth;
+    let h = window.innerHeight;
+    canvas.width = w;
+    canvas.height = h;
+
+    let particles = createParticles(w, h);
+
+    function resize() {
+      w = window.innerWidth;
+      h = window.innerHeight;
+      canvas.width = w;
+      canvas.height = h;
+      particles = createParticles(w, h);
+    }
+
+    window.addEventListener("resize", resize);
+
+    function animate() {
+      const ctx = canvas.getContext("2d");
+      ctx.clearRect(0, 0, w, h);
+
+      // Draw lines first (so particles are on top)
+      for (let i = 0; i < particles.length; i++) {
+        for (let j = i + 1; j < particles.length; j++) {
+          const p1 = particles[i];
+          const p2 = particles[j];
+          const dx = p1.x - p2.x;
+          const dy = p1.y - p2.y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          if (dist < LINE_DIST) {
+            ctx.beginPath();
+            ctx.moveTo(p1.x, p1.y);
+            ctx.lineTo(p2.x, p2.y);
+            ctx.strokeStyle = "rgba(255,255,255," + (1 - dist / LINE_DIST) * 0.7 + ")";
+            ctx.lineWidth = 1.2;
+            ctx.globalAlpha = 0.7;
+            ctx.stroke();
+            ctx.globalAlpha = 1;
+          }
+        }
+      }
+
+      // Move and draw particles
+      for (let i = 0; i < particles.length; i++) {
+        let p = particles[i];
+
+        // Mouse ripple effect
+        if (mouse.current.x !== null && mouse.current.y !== null) {
+          const dx = p.x - mouse.current.x;
+          const dy = p.y - mouse.current.y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          if (dist < 120) {
+            const force = (120 - dist) / 120 * SENSITIVITY * 18;
+            p.vx += (dx / dist) * force;
+            p.vy += (dy / dist) * force;
+          }
+        }
+
+        // Move
+        p.x += p.vx;
+        p.y += p.vy;
+
+        // Friction to prevent runaway
+        p.vx *= 0.96;
+        p.vy *= 0.96;
+
+        // Bounce off edges
+        if (p.x < 0 || p.x > w) p.vx *= -1;
+        if (p.y < 0 || p.y > h) p.vy *= -1;
+        p.x = Math.max(0, Math.min(w, p.x));
+        p.y = Math.max(0, Math.min(h, p.y));
+
+        // Draw particle (draw after lines for visibility)
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, PARTICLE_RADIUS, 0, 2 * Math.PI);
+        ctx.fillStyle = "rgba(91, 90, 90, 0.8)";
+        ctx.shadowColor = "rgba(82, 80, 80, 0.5)";
+        ctx.shadowBlur = 10; // More blur for glow
+        ctx.globalAlpha = 1;
+        ctx.fill();
+        ctx.shadowBlur = 0;
+        ctx.globalAlpha = 1;
+      }
+
+      animationRef.current = requestAnimationFrame(animate);
+    }
+
+    animate();
+
+    function handleMouseMove(e) {
+      mouse.current.x = e.clientX;
+      mouse.current.y = e.clientY;
+    }
+    function handleMouseLeave() {
+      mouse.current.x = null;
+      mouse.current.y = null;
+    }
+
+    window.addEventListener("mousemove", handleMouseMove);
+    window.addEventListener("mouseleave", handleMouseLeave);
+
+    return () => {
+      window.removeEventListener("resize", resize);
+      window.removeEventListener("mousemove", handleMouseMove);
+      window.removeEventListener("mouseleave", handleMouseLeave);
+      cancelAnimationFrame(animationRef.current);
+    };
+  }, [createParticles]);
+
+  return (
+    <canvas
+      ref={canvasRef}
+      className="fixed inset-0 w-full h-full -z-10 pointer-events-none"
+      style={{ background: "#000" }}
+      aria-hidden="true"
+    />
+  );
+}
+
 export default function SkillsPage() {
   const [activeTab, setActiveTab] = useState("all");
   const currentCategory = skillCategories.find((cat) => cat.key === activeTab);
@@ -216,13 +359,12 @@ export default function SkillsPage() {
   };
 
   return (
-    <div className="relative min-h-screen w-full bg-[black] flex flex-col items-center justify-center overflow-hidden px-2 py-16">
-      {/* Animated molecular background */}
-      <MolecularBg />
-
+    <div className="relative min-h-screen w-full flex flex-col items-center justify-center overflow-hidden px-2 py-16">
+      {/* High-speed molecular animated background */}
+      <FastMolecularBg />
       {/* "Skills" text at top */}
       <span
-        className="z-10 text-[5rem] font-extrabold text-[#ffff] opacity-50 select-none pointer-events-none"
+        className="z-10 text-[5rem] font-extrabold text-[#ffff] opacity-50 select-none pointer-events-none absolute top-2 left-1/2 -translate-x-1/2"
         style={{
           fontFamily: "'Fira Mono', 'Consolas', monospace",
           letterSpacing: "-0.05em",
@@ -241,10 +383,10 @@ export default function SkillsPage() {
       </button> */}
 
       {/* Cards */}
-      <div className="relative z-10 flex flex-col md:flex-row items-center justify-center gap-16 mt-2">
+      <div className="relative z-10 mt-8 flex flex-col md:flex-row items-center justify-center gap-16 mt-2">
         {/* Software Developer Card */}
         <div
-          className="group bg-white border-2 border-black rounded-md shadow-lg p-8 w-[430px] h-[520px] flex flex-col transition duration-200 hover:bg-gray-200/40 hover:shadow-none"
+          className="group bg-white border-2 border-black rounded-md shadow-lg p-8 w-[430px] h-[520px] flex flex-col transition duration-200 hover:bg-gray-200/70 hover:shadow-none"
           style={{
             fontFamily: "'Fira Mono', 'Consolas', monospace",
             boxShadow: "0 2px 8px 0 rgba(0,0,0,0.10)",
@@ -285,7 +427,7 @@ export default function SkillsPage() {
 
         {/* Frontend Developer Card */}
         <div
-          className="group bg-white border-2 border-black rounded-md shadow-lg p-8 w-[430px] h-[520px] flex flex-col transition duration-200 hover:bg-gray-200/40 hover:shadow-none"
+          className="group bg-white border-2 border-black rounded-md shadow-lg p-8 w-[430px] h-[520px] flex flex-col transition duration-200 hover:bg-gray-200/70 hover:shadow-none"
           style={{
             fontFamily: "'Fira Mono', 'Consolas', monospace",
             boxShadow: "0 2px 8px 0 rgba(10, 10, 10, 0.1)",

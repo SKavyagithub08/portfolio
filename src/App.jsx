@@ -23,6 +23,7 @@ export default function App() {
             <Route path="/projects" element={<ProjectsPage />} />
             <Route path="/about" element={<AboutPage />} />
             <Route path="/skills" element={<SkillsPage />} />
+            {/* Ensure this route exists */}
             <Route path="/contact" element={<ContactPage />} />
           </Routes>
         </>
