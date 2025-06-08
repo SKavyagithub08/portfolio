@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef, useCallback } from "react";
 import { motion } from "framer-motion";
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import AboutPage from "./AboutPage";
 import SkillsPage from "./SkillsPage";
 import { FaGithub, FaLinkedin, FaEnvelope } from "react-icons/fa";
@@ -174,13 +174,6 @@ export default function LandingSection() {
   const [showSkills, setShowSkills] = useState(false);
   const aboutRef = useRef(null);
   const projectsRef = useRef(null);
-  const navigate = useNavigate();
-
-  // Remove duplicate handleStartProject
-  const handleStartProject = (e) => {
-    e.preventDefault();
-    navigate("/contact");
-  };
 
   // Animate the main "kavya" letter by letter
   useEffect(() => {
@@ -216,7 +209,7 @@ export default function LandingSection() {
         {/* Molecular animation only in this black area */}
         <FastMolecularBgHome />
         {/* Main identity row at bottom */}
-        <div className="flex items-end justify-between w-full px-8 pb-[10vh] flex-1">
+        <div className="flex items-end justify-between w-full px-8 pb-[10vh] flex-1 z-10">
           <div>
             <h1 className="text-[10vw] md:text-[7vw] font-bold uppercase tracking-tight leading-none flex">
               {name.split("").map((char, i) => (
@@ -244,14 +237,10 @@ export default function LandingSection() {
               Full Stack Developer & Designer
             </motion.span>
           </div>
-          <motion.button
-            type="button"
-            onClick={handleStartProject}
-            className="flex items-center text-white text-s font-normal transition-colors duration-200 hover:text-gray-300 cursor-pointer bg-transparent border-none outline-none"
-            initial={{ opacity: 0, x: 30 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: 0.5, duration: 0.4, type: "spring" }}
-            style={{ padding: 0 }}
+          <NavLink
+            to="/contact"
+            className="flex items-center text-white text-s font-normal transition-colors duration-200 hover:text-gray-300 cursor-pointer bg-transparent border-none outline-none pointer-events-auto"
+            style={{ padding: 0, background: "none" }}
           >
             Start a project
             <svg
@@ -268,12 +257,12 @@ export default function LandingSection() {
                 d="M5 19L19 5M19 5v8m0-8h-8"
               />
             </svg>
-          </motion.button>
+          </NavLink>
         </div>
         {/* Scroll icon/visual in the middle bottom */}
-        <div className="absolute left-1/2 bottom-8 transform -translate-x-1/2 z-30 flex flex-col items-center pointer-events-none select-none">
+        <div className="absolute left-1/2 bottom-8 transform -translate-x-1/2 z-30 flex flex-col items-center select-none">
           <span
-            className="flex items-center justify-center w-10 h-10 rounded-full bg-black/60 shadow-lg transition-all duration-500"
+            className="flex items-center justify-center w-10 h-10 rounded-full bg-black/60 shadow-lg transition-all duration-500 pointer-events-none"
             style={{
               boxShadow: "0 4px 24px 0 rgba(0,0,0,0.18)",
               backdropFilter: "blur(1px)",

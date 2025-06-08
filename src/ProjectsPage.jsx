@@ -212,8 +212,8 @@ export default function ProjectsPage() {
 						onTouchEnd={handleTouchEnd}
 						onTouchMove={handleTouchMove}
 					>
-						{projects.map((project) => (
-							<ProjectCard key={project.name} project={project} />
+						{projects.map((project, idx) => (
+							<ProjectCard key={project.name + idx} project={project} />
 						))}
 					</div>
 				</div>
