@@ -395,20 +395,19 @@ export default function SkillsPage() {
           <div className="flex items-center gap-2 mb-4">
             <span className="text-3xl">💻</span>
             <span className="text-2xl font-bold" style={{ fontFamily: "inherit" }}>
-              Software Developer
+              Backend Developer
             </span>
           </div>
           <p className="mb-6 text-xl" style={{ fontFamily: "inherit" }}>
-            I enjoy writing clean code and<br />
-            creating useful products.
+            I design the unseen to make everything seen work better.
           </p>
           <div className="mb-4">
             <span className="font-bold text-xl" style={{ fontFamily: "inherit" }}>
               I LIKE TO CODE IN
             </span>
             <pre className="mt-1 text-lg whitespace-pre-wrap" style={{ fontFamily: "inherit" }}>
-  Python, Java, Javascript, Node,
-  MySQL, GraphQL, Spring, C, C++,
+  Java, Javascript, Node, Express
+  MySQL, Spring, C, Rest API,
   MongoDB &amp; Dart
             </pre>
           </div>
@@ -416,11 +415,13 @@ export default function SkillsPage() {
             <span className="font-bold text-xl" style={{ fontFamily: "inherit" }}>
               TOOLS
             </span>
-            <ul className="list-disc ml-8 mt-1 text-lg" style={{ fontFamily: "inherit" }}>
-              <li>Anaconda</li>
-              <li>Eclipse</li>
-              <li>Jupyter</li>
-              <li>Pycharm</li>
+            <ul className="list-disc ml-8 mb-2 text-lg" style={{ fontFamily: "inherit" }}>
+              <li>VS Code</li>
+              <li>Android Studio</li>
+              <li>Postman API</li>
+              <li>Render</li>
+              <li>MongoDB Atlas</li>
+              <li>Firebase</li>
             </ul>
           </div>
         </div>
@@ -440,18 +441,15 @@ export default function SkillsPage() {
             </span>
           </div>
           <p className="mb-6 text-xl" style={{ fontFamily: "inherit" }}>
-            It's fun for me to bring new concepts<br />
-            to life. I consider myself fortunate<br />
-            to be a Fullstack developer because my<br />
-            work has a direct impact on the user's life.
+            I code the canvas<br />your users interact with.
           </p>
           <div className="mb-4">
             <span className="font-bold text-xl" style={{ fontFamily: "inherit" }}>
               SKILLS
             </span>
             <pre className="mt-1 text-lg whitespace-pre-wrap" style={{ fontFamily: "inherit" }}>
-  Html, Css, Js, Handlebars, React,
-  Redux, Sass, Bootstrap, Firebase
+  Html, Css, Js, React,
+  Redux, Bootstrap, Tailwind CSS, Firebase, Flutter
             </pre>
           </div>
           <div>
@@ -459,7 +457,7 @@ export default function SkillsPage() {
               TOOLS
             </span>
             <pre className="mt-1 text-lg whitespace-pre-wrap" style={{ fontFamily: "inherit" }}>
-  VScode, Figma, Github, AdobeXD etc.
+  VScode, Figma, Github, Vercel.
             </pre>
           </div>
         </div>
