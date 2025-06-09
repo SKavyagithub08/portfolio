@@ -1,65 +1,66 @@
 import React, { useRef, useState } from "react";
 import { FaGithub, FaLinkedin, FaEnvelope } from "react-icons/fa";
+import { motion, AnimatePresence } from "framer-motion";
 
 const projects = [
 	{
-		name: "KryptoGiffy",
+		name: "Hydrax",
 		description:
-			"This platform allows you to perform transactions via Blockchain by using Ethereum mainnet. Prerequisite: Web3.0 Wallet.",
-		image: "/project1.png",
-		github: "https://github.com/yourusername/kryptogiffy",
-		tags: ["#Ropsten", "#Goerli", "#Ethereum", "#Web 3.0"],
-		visit: "https://yourproject1.com",
+			"A smart water bottle powered by Flutter, Firebase, and ESP32 BLE, featuring Peltier-based real-time temperature control, ambient-aware auto-adjustments, and personalized hydration tracking. It redefines a daily-use item with IoT and AI-enhanced logic",
+		image: "/project1.jpg",
+		github: "https://github.com/sivaprakasam-07/hydrax_new",
+		tags: ["#Flutter widgets", "#Dart", "#Adroid Studio", "#GetX", "#ESP32", "#Firebase"],
+		visit: "https://github.com/sivaprakasam-07/hydrax_new",
 	},
 	{
-		name: "Graphical Password Authentication",
-		description:
-			"Users can set passwords using images and their sequence using this project, which implements the same concept for password authentication as recaptcha (checks for Human). I have presented the Live Demo for Smart India Hackathon",
+		name: "Tech Cart",
+description:
+	"Built a secure e-commerce app with Firebase, Stripe, and Bcrypt. Designed a responsive UI using Tailwind + Headless UI, implemented auth, privacy, and cookie handling, real-time alerts via React Toastify, and backend modeling with Mongoose.",
 		image: "/project2.jpg",
-		github: "https://github.com/yourusername/graphical-password",
-		tags: [],
-		visit: "https://yourproject2.com",
+		github: "https://github.com/SKavyagithub08/fullstack-projects/tree/main/TECH%20CART/FullStack%20projects/NextJS-TechCart-24",
+		tags: ["#React", "#Tailwind CSS", "#bycrpt","#toastify","#JavaScript", "#Node.js", "#Express", "#MongoDB"],
+		visit: "https://github.com/SKavyagithub08/fullstack-projects/tree/main/TECH%20CART/FullStack%20projects/NextJS-TechCart-24",
 	},
 	{
-		name: "Breach Checker",
+		name: "E-axion'24",
 		description:
-			"This website checks if your passwords or critical information has been leaked anywhere in the internet or not. This website is completely free, secure and not vulnerable to attacks like SQL Injection, XSS, etc.",
-		image: "/project3.jpg",
-		github: "https://github.com/yourusername/breach-checker",
-		tags: [],
-		visit: "https://yourproject3.com",
+			"A dynamic and responsive frontend website built for the E-Axion'24 Technical Symposium, designed to streamline event registrations, provide event details, and showcase the symposium's theme and schedule. The site delivers an engaging user experience for students, staff, and event coordinators alike.",
+		image: "/project3.png",
+		github: "https://github.com/SKavyagithub08/fullstack-projects/tree/main/ECE%20sympo-main",
+		tags: ["#html", "#css", "#JavaScript", "#Bootstrap",],
+		visit: "https://e--axion24.web.app/",
 	},
 	{
-		name: "Crypto King",
-		description: "Crypto king is a web app that shows Top 100 cryptocurrencies as well as detailed info.",
-		image: "/project4.jpg",
-		github: "https://github.com/yourusername/crypto-king",
-		tags: [],
-		visit: "https://yourproject4.com",
+		name: "Event Scheduler",
+		description: "A full-stack MERN application designed to streamline college event management. It supports dual logins (admin/user), event creation, ticketing, planning, and real-time updates. It replaces chaotic manual systems with an intuitive, centralized platform bridging tech with real student needs.",
+		image: "/project4.png",
+		github: "https://github.com/sivaprakasam-07/Event-Tracker",
+		tags: ["#React", "#Tailwind CSS", "#JavaScript", "#Node.js", "#Express", "#MongoDB"],
+		visit: "https://github.com/sivaprakasam-07/Event-Tracker",
 	},
     {
-		name: "Crypto King",
-		description: "Crypto king is a web app that shows Top 100 cryptocurrencies as well as detailed info.",
-		image: "/project4.jpg",
-		github: "https://github.com/yourusername/crypto-king",
-		tags: [],
-		visit: "https://yourproject4.com",
+		name: "SaferouteX",
+		description: "Developing a next-gen women’s safety app that fuses AI threat prediction, real-time emergency response, and community intelligence — empowering women to move freely while fostering a culture of proactive protection.",
+		image: "/project5.jpg",
+		github: "https://github.com/Joanfestina/saferouteX",
+		tags: ["#Flutter widgets", "#Dart", "#Adroid Studio", "#Firebase"],
+		visit: "https://github.com/Joanfestina/saferouteX",
 	},
     {
-		name: "Crypto King",
-		description: "Crypto king is a web app that shows Top 100 cryptocurrencies as well as detailed info.",
-		image: "/project4.jpg",
-		github: "https://github.com/yourusername/crypto-king",
-		tags: [],
-		visit: "https://yourproject4.com",
+		name: "Dynamic Form",
+		description: "A responsive and customizable dynamic form where users can add, edit, or remove input fields in real-time. Perfect for surveys, registrations, or any use case needing flexible user-driven forms. Built for scalability and smooth user experience",
+		image: "/project6.png",
+		github: "https://github.com/SKavyagithub08/dynamic-form",
+		tags: ["#React", "#Tailwind CSS", "#JavaScript", "#Node.js", "#Express", "#MongoDB"],
+		visit: "https://dynamic-form-frontend.onrender.com/",
 	},
     {
-		name: "Crypto King",
-		description: "Crypto king is a web app that shows Top 100 cryptocurrencies as well as detailed info.",
-		image: "/project4.jpg",
-		github: "https://github.com/yourusername/crypto-king",
-		tags: [],
-		visit: "https://yourproject4.com",
+		name: "Netflix Clone",
+		description: "A sleek, responsive Netflix clone built with HTML, CSS, and JavaScript. Features a modern UI, interactive movie sections, hover animations, and a static preview of Netflix’s homepage experience. Designed purely for frontend practice and UI/UX enhancement.",
+		image: "/project7.png",
+		github: "https://github.com/SKavyagithub08/front-end/tree/main/NetFlix",
+		tags: ["#Html", "#CSS", "#JavaScript"],
+		visit: "https://github.com/SKavyagithub08/front-end/tree/main/NetFlix",
 	},
 ];
 
@@ -80,31 +81,31 @@ function ProjectCard({ project }) {
 
 	return (
 		<div
-			className="flex-shrink-0 w-[280px] min-h-[350px] perspective scroll-snap-align-start"
+			className="flex-shrink-0 mb-9 w-[240px] min-h-[340px] perspective scroll-snap-align-start"
 			style={{ perspective: "1200px", scrollSnapAlign: "start" }}
 			onTouchStart={handleTouch}
 		>
 			<div
-				className={`relative w-full min-h-[350px] h-full transition-transform duration-500 transform-style-preserve-3d ${flipped ? "rotate-y-180" : ""}`}
+				className={`relative w-full min-h-[340px] h-full transition-transform duration-500 transform-style-preserve-3d ${flipped ? "rotate-y-180" : ""}`}
 				style={{ transformStyle: "preserve-3d" }}
 				onMouseEnter={() => setFlipped(true)}
 				onMouseLeave={() => setFlipped(false)}
 			>
 				{/* Front */}
 				<div
-					className="absolute w-full min-h-[350px] h-full bg-[#faf7f6] flex flex-col items-center justify-start shadow-2xl px-7 pt-7 pb-5 text-center cursor-pointer border border-white transition-transform duration-200 hover:scale-105 hover:-translate-y-1"
+					className="absolute w-full min-h-[340px] h-full bg-[#faf7f6] flex flex-col items-center justify-start shadow-2xl px-5 pt-6 pb-4 text-center cursor-pointer border border-white transition-transform duration-200 hover:scale-105 hover:-translate-y-1"
 					style={{
 						backfaceVisibility: "hidden",
 						clipPath,
 						boxShadow: "0 8px 32px 0 rgba(0,0,0,0.10)",
 					}}
 				>
-					<h2 className="text-xl md:text-2xl font-bold mb-3 mt-0">{project.name}</h2>
-					<p className="text-sm md:text-base text-black font-normal flex-1">{project.description}</p>
+					<h2 className="text-lg md:text-xl font-bold mb-2 mt-0">{project.name}</h2>
+					<p className="text-xs md:text-sm text-black font-normal flex-1">{project.description}</p>
 				</div>
 				{/* Back */}
 				<div
-					className="absolute w-full min-h-[350px] h-full bg-black flex flex-col items-center justify-between shadow-2xl px-5 pt-7 pb-5 text-center rotate-y-180 border border-white transition-transform duration-200 hover:scale-105 hover:-translate-y-1"
+					className="absolute w-full min-h-[340px] h-full bg-black flex flex-col items-center justify-between shadow-2xl px-4 pt-6 pb-4 text-center rotate-y-180 border border-white transition-transform duration-200 hover:scale-105 hover:-translate-y-1"
 					style={{
 						backfaceVisibility: "hidden",
 						color: "#fff",
@@ -112,17 +113,36 @@ function ProjectCard({ project }) {
 						boxShadow: "0 8px 32px 0 rgba(0,0,0,0.18)",
 					}}
 				>
+					{/* Image */}
 					<img
 						src={project.image}
 						alt={project.name}
-						className="w-full h-32 object-cover rounded-xl mb-3 border border-gray-800"
+						className="w-full h-28 object-cover rounded-xl mb-2 border border-gray-800"
 					/>
-					<div className="flex items-center justify-between w-full px-2 mt-2">
+					{/* Horizontal line */}
+					<hr className="w-full border-t border-white opacity-80 my-2" />
+					{/* Tags area */}
+					<div className="flex flex-wrap gap-x-2 gap-y-1 justify-start w-full mb-2 px-1 min-h-[28px]">
+						{(project.tags && project.tags.length > 0
+							? project.tags
+							: ["#Tag"])
+							.map((tag, idx) => (
+								<span key={idx} className="text-white text-xs font-light">{tag}</span>
+							))}
+					</div>
+					{/* Visit and GitHub row */}
+					<div className="flex items-center justify-between w-full px-1 mt-auto">
 						<a
 							href={project.visit}
 							target="_blank"
 							rel="noopener noreferrer"
-							className="flex-1 bg-[#faf7f6] text-black rounded-full px-4 py-2 font-semibold text-base shadow hover:bg-gray-200 transition text-center"
+							className="flex items-center bg-[#faf7f6] text-black text-base font-normal px-5 py-1.5 rounded-l-full rounded-tr-[0.5rem] rounded-br-[0.5rem] shadow hover:bg-gray-200 transition min-w-[80px] justify-center"
+							style={{
+								borderTopRightRadius: "0.5rem",
+								borderBottomRightRadius: "0.5rem",
+								borderTopLeftRadius: "2rem",
+								borderBottomLeftRadius: "2rem",
+							}}
 						>
 							Visit
 						</a>
@@ -130,10 +150,10 @@ function ProjectCard({ project }) {
 							href={project.github}
 							target="_blank"
 							rel="noopener noreferrer"
-							className="ml-3 text-white hover:text-gray-300 text-2xl"
+							className="ml-3 flex items-center justify-center w-8 h-8 rounded-full bg-white text-black shadow border border-white hover:bg-gray-100 transition"
 							aria-label="GitHub"
 						>
-							<FaGithub />
+							<FaGithub size={18} />
 						</a>
 					</div>
 				</div>
@@ -188,52 +208,67 @@ export default function ProjectsPage() {
 	};
 
 	return (
-		<div className="relative min-h-screen bg-black flex flex-col">
-			{/* Projects horizontal carousel */}
-			<div className="flex-1 flex flex-col items-center justify-center px-4 py-16">
-				<h1 className="text-[8vw] md:text-[5vw] font-extrabold text-white opacity-50 absolute top-8 left-1/2 -translate-x-1/2 pointer-events-none select-none z-0" style={{ letterSpacing: "-0.05em" }}>
-					MY WORK
-				</h1>
-				<div className="relative z-10 w-full max-w-7xl mt-24">
-					<div
-						ref={scrollRef}
-						className="flex gap-x-6 overflow-x-auto pb-4 px-2"
-						style={{
-							scrollSnapType: "x mandatory",
-							WebkitOverflowScrolling: "touch",
-							scrollbarWidth: "none",
-							msOverflowStyle: "none",
-						}}
-						onMouseDown={handleMouseDown}
-						onMouseLeave={handleMouseLeave}
-						onMouseUp={handleMouseUp}
-						onMouseMove={handleMouseMove}
-						onTouchStart={handleTouchStart}
-						onTouchEnd={handleTouchEnd}
-						onTouchMove={handleTouchMove}
-					>
-						{projects.map((project, idx) => (
-							<ProjectCard key={project.name + idx} project={project} />
-						))}
+		<AnimatePresence>
+			<motion.div
+				key="projects-page"
+				initial={{ opacity: 0, y: 0 }}
+				animate={{
+					opacity: 1,
+					y: 0,
+					transition: { duration: 0.3, ease: "easeOut" }
+				}}
+				exit={{
+					opacity: 0,
+					y: 0,
+					transition: { duration: 0.3, ease: "easeIn" }
+				}}
+				className="relative min-h-screen bg-black flex flex-col"
+			>
+				{/* Projects horizontal carousel */}
+				<div className="flex-1 flex flex-col items-center justify-center px-4 py-16">
+					<h1 className="text-[8vw] md:text-[5vw] font-extrabold text-white opacity-50 absolute top-8 left-1/2 -translate-x-1/2 pointer-events-none select-none z-0" style={{ letterSpacing: "-0.05em" }}>
+						MY WORK
+					</h1>
+					<div className="relative z-10 w-full max-w-7xl mt-24">
+						<div
+							ref={scrollRef}
+							className="flex gap-x-20 ml-10 overflow-x-auto pb-4 px-2"
+							style={{
+								scrollSnapType: "x mandatory",
+								WebkitOverflowScrolling: "touch",
+								scrollbarWidth: "none",
+								msOverflowStyle: "none",
+							}}
+							onMouseDown={handleMouseDown}
+							onMouseLeave={handleMouseLeave}
+							onMouseUp={handleMouseUp}
+							onMouseMove={handleMouseMove}
+							onTouchStart={handleTouchStart}
+							onTouchEnd={handleTouchEnd}
+							onTouchMove={handleTouchMove}
+						>
+							{projects.map((project, idx) => (
+								<ProjectCard key={project.name + idx} project={project} />
+							))}
+						</div>
 					</div>
 				</div>
-			</div>
-			{/* Socials horizontal bar at center bottom */}
-			<div className="absolute left-1/2 bottom-8 transform -translate-x-1/2 flex flex-row items-center gap-8 text-gray-200 text-2xl font-sans z-20">
-				{socials.map((s) => (
-					<a
-						key={s.label}
-						href={s.url}
-						target="_blank"
-						rel="noopener noreferrer"
-						className="hover:text-white transition-colors"
-						aria-label={s.label}
-					>
-						{s.icon}
-					</a>
-				))}
-			</div>
-			<style>{`
+				{/* Socials horizontal bar at center bottom */}
+				<div className="absolute left-1/2 bottom-8 transform -translate-x-1/2 flex flex-row items-center gap-8 text-gray-200 text-2xl font-sans z-20">
+					{socials.map((s) => (
+						<a
+							key={s.label}
+							href={s.url}
+							target="_blank"
+							rel="noopener noreferrer"
+							className="hover:text-white transition-colors"
+							aria-label={s.label}
+						>
+							{s.icon}
+						</a>
+					))}
+				</div>
+				<style>{`
         .scrollbar-thin::-webkit-scrollbar { display: none; }
         .cursor-grabbing { cursor: grabbing !important; }
         .perspective { perspective: 1200px; }
@@ -241,6 +276,7 @@ export default function ProjectsPage() {
         .transform-style-preserve-3d { transform-style: preserve-3d; }
         .scroll-snap-align-start { scroll-snap-align: start; }
       `}</style>
-		</div>
+			</motion.div>
+		</AnimatePresence>
 	);
 }

@@ -124,7 +124,7 @@ function FastMolecularBg() {
       animationRef.current = requestAnimationFrame(animate);
     }
 
-    animate();
+    // animate();
 
     // Attach mouse events to the window (not canvas) so mouse position is tracked even when content overlays the canvas
     function handleMouseMove(e) {
@@ -310,35 +310,37 @@ export default function LandingSection() {
         {/* Project 1 */}
         <div className="relative w-full h-[48vh] max-h-[480px] flex items-center justify-center overflow-hidden group cursor-pointer">
           <img
-            src="/project1.png"
-            alt="Project 1"
-            className="absolute inset-0 w-full h-full object-cover"
-          />
-          <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10 flex flex-col items-center justify-center w-full h-full">
-            <span className="text-4xl md:text-5xl font-light text-white mb-2">
-              Paperlane
-            </span>
-            <span className="text-lg md:text-xl text-white font-normal">
-              Brand Design
-            </span>
-          </div>
-        </div>
-        {/* Project 2 */}
-        <div className="relative w-full h-[48vh] max-h-[480px] flex items-center justify-center overflow-hidden group cursor-pointer">
-          <img
             src="/project2.jpg"
             alt="Project 2"
             className="absolute inset-0 w-full h-full object-cover"
           />
           <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10 flex flex-col items-center justify-center w-full h-full">
             <span className="text-4xl md:text-5xl font-light text-white mb-2">
-              Portfolio Website
+              Tech Cart
             </span>
             <span className="text-lg md:text-xl text-white font-normal">
-              Frontend Dev
+              Clothing E-commerce
             </span>
           </div>
         </div>
+        {/* Project 2 */}
+        <div className="relative w-full h-[48vh] max-h-[480px] flex items-center justify-center overflow-hidden group cursor-pointer">
+          <img
+            src="/project3.png"
+            alt="Project 1"
+            className="absolute inset-0 w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10 flex flex-col items-center justify-center w-full h-full">
+            <span className="text-4xl md:text-5xl font-light text-white mb-2">
+              E-axion'25
+            </span>
+            <span className="text-lg md:text-xl text-white font-normal">
+              Symposium Website
+            </span>
+          </div>
+        </div>
+        
+        
         {/* View all projects link */}
         <div className="w-full flex justify-end px-8 py-6">
           <NavLink
