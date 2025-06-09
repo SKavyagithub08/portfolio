@@ -12,18 +12,17 @@ const socials = [
   { icon: <FaEnvelope />, url: "mailto:kavyasri2330@gmail.com", label: "Email" },
 ];
 
-// High-speed molecular animated background for home black area only
-function FastMolecularBgHome() {
+// --- High-speed molecular animated background using HTML canvas (copied from SkillsPage) ---
+function FastMolecularBg() {
   const canvasRef = useRef(null);
   const animationRef = useRef();
   const mouse = useRef({ x: null, y: null });
-  const PARTICLE_COUNT =100;
-  const SPEED = 0;
+  const PARTICLE_COUNT = 40;
+  const SPEED = 2;
   const SENSITIVITY = 0.32;
   const LINE_DIST = 0;
   const PARTICLE_RADIUS = 2.5;
 
-  // Generate initial particles
   const createParticles = useCallback((w, h) => {
     return Array.from({ length: PARTICLE_COUNT }).map(() => ({
       x: Math.random() * w,
@@ -36,25 +35,21 @@ function FastMolecularBgHome() {
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
-    // Get the parent section's size (the black area)
+    // Use parent section size instead of window size for correct coverage
     const parent = canvas.parentElement;
-    let w = parent.offsetWidth;
-    let h = parent.offsetHeight;
+    let w = parent ? parent.offsetWidth : window.innerWidth;
+    let h = parent ? parent.offsetHeight : window.innerHeight;
     canvas.width = w;
     canvas.height = h;
 
     let particles = createParticles(w, h);
 
     function resize() {
-      w = parent.offsetWidth;
-      h = parent.offsetHeight;
+      w = parent ? parent.offsetWidth : window.innerWidth;
+      h = parent ? parent.offsetHeight : window.innerHeight;
       canvas.width = w;
       canvas.height = h;
-      // Keep the same particles but reposition if out of bounds
-      for (let p of particles) {
-        p.x = Math.max(0, Math.min(w, p.x));
-        p.y = Math.max(0, Math.min(h, p.y));
-      }
+      particles = createParticles(w, h);
     }
 
     window.addEventListener("resize", resize);
@@ -88,12 +83,12 @@ function FastMolecularBgHome() {
       for (let i = 0; i < particles.length; i++) {
         let p = particles[i];
 
-        // Mouse ripple effect (relative to canvas)
+        // Mouse ripple effect
         if (mouse.current.x !== null && mouse.current.y !== null) {
           const dx = p.x - mouse.current.x;
           const dy = p.y - mouse.current.y;
           const dist = Math.sqrt(dx * dx + dy * dy);
-          if (dist < 120 && dist > 0.1) {
+          if (dist < 120) {
             const force = (120 - dist) / 120 * SENSITIVITY * 18;
             p.vx += (dx / dist) * force;
             p.vy += (dy / dist) * force;
@@ -109,23 +104,21 @@ function FastMolecularBgHome() {
         p.vy *= 0.96;
 
         // Bounce off edges
-        if (p.x < 0) { p.x = 0; p.vx *= -1; }
-        if (p.x > w) { p.x = w; p.vx *= -1; }
-        if (p.y < 0) { p.y = 0; p.vy *= -1; }
-        if (p.y > h) { p.y = h; p.vy *= -1; }
+        if (p.x < 0 || p.x > w) p.vx *= -1;
+        if (p.y < 0 || p.y > h) p.vy *= -1;
+        p.x = Math.max(0, Math.min(w, p.x));
+        p.y = Math.max(0, Math.min(h, p.y));
 
         // Draw particle (draw after lines for visibility)
-        ctx.save();
         ctx.beginPath();
         ctx.arc(p.x, p.y, PARTICLE_RADIUS, 0, 2 * Math.PI);
-        ctx.fillStyle = "rgba(145, 138, 138, 0.8)";
-        ctx.shadowColor = "rgba(145, 138, 138, 0.8)";
+        ctx.fillStyle = "rgba(91, 90, 90, 0.8)";
+        ctx.shadowColor = "rgba(82, 80, 80, 0.5)";
         ctx.shadowBlur = 10;
         ctx.globalAlpha = 1;
         ctx.fill();
         ctx.shadowBlur = 0;
         ctx.globalAlpha = 1;
-        ctx.restore();
       }
 
       animationRef.current = requestAnimationFrame(animate);
@@ -133,7 +126,7 @@ function FastMolecularBgHome() {
 
     animate();
 
-    // Mouse move relative to canvas
+    // Attach mouse events to the window (not canvas) so mouse position is tracked even when content overlays the canvas
     function handleMouseMove(e) {
       const rect = canvas.getBoundingClientRect();
       mouse.current.x = e.clientX - rect.left;
@@ -143,15 +136,13 @@ function FastMolecularBgHome() {
       mouse.current.x = null;
       mouse.current.y = null;
     }
-
-    // pointer-events-auto so canvas gets mouse events
-    canvas.addEventListener("mousemove", handleMouseMove);
-    canvas.addEventListener("mouseleave", handleMouseLeave);
+    window.addEventListener("mousemove", handleMouseMove);
+    window.addEventListener("mouseleave", handleMouseLeave);
 
     return () => {
       window.removeEventListener("resize", resize);
-      canvas.removeEventListener("mousemove", handleMouseMove);
-      canvas.removeEventListener("mouseleave", handleMouseLeave);
+      window.removeEventListener("mousemove", handleMouseMove);
+      window.removeEventListener("mouseleave", handleMouseLeave);
       cancelAnimationFrame(animationRef.current);
     };
   }, [createParticles]);
@@ -159,8 +150,8 @@ function FastMolecularBgHome() {
   return (
     <canvas
       ref={canvasRef}
-      className="absolute inset-0 w-full h-full z-0 pointer-events-auto"
-      style={{ background: "transparent" }}
+      className="absolute inset-0 w-full h-full z-0 pointer-events-none"
+      style={{ background: "#000" }}
       aria-hidden="true"
     />
   );
@@ -206,8 +197,8 @@ export default function LandingSection() {
     <>
       {/* Landing Section: Half viewport height */}
       <section className="min-h-[85vh] h-[85vh] bg-black text-white flex flex-col relative overflow-hidden">
-        {/* Molecular animation only in this black area */}
-        <FastMolecularBgHome />
+        {/* High-speed molecular animated background (same as SkillsPage) */}
+        <FastMolecularBg />
         {/* Main identity row at bottom */}
         <div className="flex items-end justify-between w-full px-8 pb-[10vh] flex-1 z-10">
           <div>
