@@ -2,106 +2,6 @@ import React, { useState, useEffect, useRef, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { FaGithub, FaLinkedin, FaEnvelope } from "react-icons/fa";
 
-// Categorized skills data
-const skillCategories = [
-    {
-        key: "all",
-        label: "All",
-        skills: [
-            // All skills (flattened)
-            { name: "Java", logo: "/public/java.svg", category: "Programming Languages" },
-            { name: "JavaScript", logo: "/public/js.svg", category: "Programming Languages" },
-            { name: "C", logo: "/public/c.svg", category: "Programming Languages" },
-            { name: "React.js", logo: "/public/react.svg", category: "Frameworks" },
-            { name: "Express.js", logo: "/public/express.svg", category: "Frameworks" },
-            { name: "Flutter", logo: "/public/flutter.svg", category: "Frameworks" },
-            { name: "HTML", logo: "/public/html5.svg", category: "Technologies" },
-            { name: "CSS", logo: "/public/css3.svg", category: "Technologies" },
-            { name: "Bootstrap", logo: "/public/bootstrap.svg", category: "Technologies" },
-            { name: "Tailwind", logo: "/public/tailwind.svg", category: "Technologies" },
-            { name: "Redux", logo: "/public/redux.svg", category: "Technologies" },
-            { name: "Node.js", logo: "/public/nodejs.svg", category: "Technologies" },
-            { name: "Rest API", logo: "/public/api.svg", category: "Technologies" },
-            { name: "Git", logo: "/public/git.svg", category: "Technologies" },
-            { name: "SpringBoot", logo: "/public/spring.svg", category: "Technologies" },
-            { name: "MySQL", logo: "/public/mysql.svg", category: "Database" },
-            { name: "MongoDB", logo: "/public/mongodb.svg", category: "Database" },
-            { name: "GitHub", logo: "/public/github.svg", category: "Developer Tools" },
-            { name: "VS Code", logo: "/public/vscode.svg", category: "Developer Tools" },
-            { name: "Android Studio", logo: "/public/androidstudio.svg", category: "Developer Tools" },
-            { name: "Postman API", logo: "/public/postman.svg", category: "Developer Tools" },
-            { name: "Vercel", logo: "/public/vercel.svg", category: "Developer Tools" },
-            { name: "Render", logo: "/public/render.svg", category: "Developer Tools" },
-            // { name: "MongoDB Compass", logo: "/public/compass.svg", category: "Developer Tools" },
-            { name: "Firebase", logo: "/public/firebase.svg", category: "Developer Tools" },
-        ],
-    },
-    {
-        key: "programming",
-        label: "Programming Languages",
-        skills: [
-            { name: "Java", logo: "/public/java.svg" },
-            { name: "JavaScript", logo: "/public/js.svg" },
-            { name: "C", logo: "/public/c.svg" },
-        ],
-    },
-    {
-        key: "frameworks",
-        label: "Frameworks",
-        skills: [
-            { name: "React.js", logo: "/public/react.svg" },
-            { name: "Express.js", logo: "/public/express.svg" },
-            { name: "Flutter", logo: "/public/flutter.svg" },
-        ],
-    },
-    {
-        key: "technologies",
-        label: "Technologies",
-        skills: [
-            { name: "HTML", logo: "/public/html5.svg" },
-            { name: "CSS", logo: "/public/css3.svg" },
-            { name: "Bootstrap", logo: "/public/bootstrap.svg" },
-            { name: "Tailwind", logo: "/public/tailwind.svg" },
-            { name: "Redux", logo: "/public/redux.svg" },
-            { name: "Node.js", logo: "/public/nodejs.svg" },
-            { name: "Rest API", logo: "/public/api.svg" },
-            { name: "Git", logo: "/public/git.svg" },
-            { name: "SpringBoot", logo: "/public/springboot.svg" },
-        ],
-    },
-    {
-        key: "database",
-        label: "Database",
-        skills: [
-            { name: "MySQL", logo: "/public/mysql.svg" },
-            { name: "MongoDB", logo: "/public/mongodb.svg" },
-        ],
-    },
-    {
-        key: "tools",
-        label: "Developer Tools",
-        skills: [
-            { name: "GitHub", logo: "/public/github.svg" },
-            { name: "VS Code", logo: "/public/vscode.svg" },
-            { name: "Android Studio", logo: "/public/androidstudio.svg" },
-            { name: "Postman API", logo: "/public/postman.svg" },
-            { name: "Vercel", logo: "/public/vercel.svg" },
-            { name: "Render", logo: "/public/render.svg" },
-            { name: "MongoDB Compass", logo: "/public/compass.svg" },
-            { name: "Firebase", logo: "/public/firebase.svg" },
-        ],
-    },
-];
-
-const tabOrder = [
-  { key: "all", label: "ALL" },
-  { key: "programming", label: "PROGRAMMING" },
-  { key: "frameworks", label: "FRAMEWORKS" },
-  { key: "technologies", label: "TECHNOLOGIES" },
-  { key: "database", label: "DATABASE" },
-  { key: "tools", label: "TOOLS" },
-];
-
 // Use the same socials as AboutPage
 const socials = [
   { icon: <FaLinkedin />, url: "https://www.linkedin.com/in/s-kavya-6424b3258/", label: "LinkedIn" },
@@ -338,7 +238,6 @@ function FastMolecularBg() {
 
 export default function SkillsPage() {
   const [activeTab, setActiveTab] = useState("all");
-  const currentCategory = skillCategories.find((cat) => cat.key === activeTab);
 
   // Animation variants for grid and cards
   const gridVariants = {
