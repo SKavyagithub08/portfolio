@@ -11,7 +11,7 @@ export default function ContactPage({ onClose }) {
     e.preventDefault();
     setStatus("");
     try {
-      const res = await fetch("http://localhost:5000/contact", {
+      const res = await fetch("/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ name, email, message }),
@@ -33,18 +33,18 @@ export default function ContactPage({ onClose }) {
   return (
     <div className={isModal ? "fixed inset-0 z-50 flex items-center justify-center bg-[#ededed]" : "min-h-screen flex items-center justify-center bg-[black] px-4 py-12"}>
       {/* Modal container */}
-      <div className="flex flex-col md:flex-row w-full max-w-5xl h-auto md:h-[80vh] bg-white rounded-lg shadow-2xl overflow-hidden relative">
+      <div className="flex w-full max-w-5xl h-[80vh] bg-white rounded-lg shadow-2xl overflow-hidden relative">
         {/* Left: Image */}
-        <div className="w-full md:flex-1 flex items-center justify-center bg-[black] mt-0 md:mt-0 p-0">
+        <div className="flex-1 flex items-center justify-center bg-[black]">
           <img
             src="/contact.jpg"
             alt="Contact Visual"
-            className="object-cover rounded-xl shadow-2xl w-full h-[120px] md:w-[380px] md:h-[550px] max-h-[150px] md:max-h-none mx-auto"
-            style={{ background: "#ededed", objectPosition: "center 10%" }}
+            className="object-cover rounded-xl shadow-2xl w-[380px] h-[550px]"
+            style={{ background: "#ededed" }}
           />
         </div>
         {/* Right: Form */}
-        <div className="flex-1 flex flex-col justify-center px-6 md:px-12 py-8 md:py-10 bg-white relative">
+        <div className="flex-1 flex flex-col justify-center px-12 py-10 bg-white relative">
           {/* Close button only if modal */}
           {isModal && (
             <button

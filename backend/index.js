@@ -6,7 +6,12 @@ const Contact = require('./models/Contact'); // Add after other require statemen
 
 const uri = process.env.MONGO_URI;
 const app = express();
-app.use(cors());
+app.use(cors({
+  origin: [
+    "https://portfolio-1-4awf.onrender.com",
+    "http://localhost:3000"
+  ]
+}));
 app.use(express.json());
 
 mongoose.connect(uri, {
