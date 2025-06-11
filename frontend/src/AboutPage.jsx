@@ -191,45 +191,65 @@ export default function AboutPage() {
             ))}
           </svg>
         </div>
-        <div className="flex flex-col md:flex-row items-center justify-center w-full max-w-6xl z-10 gap-10 md:gap-0">
-          {/* Left: Layered image cards */}
-          <div className="relative group flex-shrink-0 mb-8 md:mb-0" style={{ width: 220, height: 260 }}>
-            {/* Layered effect */}
-            {[4, 3, 2, 1].map((i) => (
+        <div className="flex flex-row items-center justify-center w-full max-w-6xl z-10">
+          {/* Mobile view: Centered Profile Image with lines, text, socials */}
+          <div className="flex flex-col items-center w-full md:hidden">
+            {/* Centered Profile Image with lines */}
+            <div className="relative flex flex-col items-center w-full mb-4">
+              {/* Layered lines */}
+              {[4, 3, 2, 1].map((i) => (
+                <div
+                  key={i}
+                  className="absolute"
+                  style={{
+                    left: `calc(50% - 75px + ${i * 6}px)`,
+                    top: `${i * 6}px`,
+                    width: 150,
+                    height: 170,
+                    border: "1px solid #232323",
+                    borderRadius: "8px",
+                    zIndex: i,
+                    background: "transparent",
+                  }}
+                />
+              ))}
+              {/* Main card */}
               <div
-                key={i}
-                className={`absolute transition-transform duration-300`}
+                className="relative overflow-hidden rounded-lg shadow-lg"
                 style={{
-                  left: i * 8,
-                  top: i * 8,
-                  width: 300,
-                  height: 340,
-                  border: "1px solid #232323",
-                  borderRadius: "8px",
-                  zIndex: i,
-                  background: "transparent",
+                  width: 150,
+                  height: 170,
+                  background: "#D8FF3E",
+                  zIndex: 10,
                 }}
-              />
-            ))}
-            {/* Main card */}
-            <div
-              className="relative overflow-hidden rounded-lg shadow-lg transition-transform duration-300 group-hover:-translate-y-2 group-hover:shadow-2xl"
-              style={{
-                width: 180,
-                height: 220,
-                background: "#D8FF3E",
-                zIndex: 10,
-              }}
-            >
-              <img
-                src="/kavya2.jpg"
-                alt="Profile"
-                className="w-full h-full object-cover object-center grayscale"
-                draggable={false}
-              />
+              >
+                <img
+                  src="/kavya2.jpg"
+                  alt="Profile"
+                  className="w-full h-full object-cover object-center grayscale"
+                  draggable={false}
+                />
+              </div>
             </div>
-            {/* Socials row under the picture */}
-            <div className="flex flex-row items-center gap-4 md:gap-6 text-gray-200 text-xl md:text-2xl font-sans mt-10 md:mt-20 justify-center">
+            {/* Name */}
+            <h1 className="text-xl font-light text-white mt-4 text-center">
+              Hello, I'm <span className="font-semibold">Kavya</span>
+            </h1>
+            {/* Highlighted Title */}
+            <h2 className="text-2xl font-light mt-2 text-center" style={{ color: "#D8FF3E" }}>
+              Full Stack Developer
+            </h2>
+            {/* Bio Paragraphs */}
+            <div className="w-full flex flex-col items-center">
+              <p className="text-base text-gray-400 font-sans max-w-xs leading-relaxed text-[16.5px] text-center mt-2">
+                I'm a Full Stack Developer with a passion for crafting intuitive, responsive, and scalable web applications. I love working across the stack—from designing clean, functional UIs to architecting robust backend systems. I’m always curious and constantly experimenting, whether it’s building smart IoT integrations, exploring Flutter + Firebase ecosystems, or diving deeper into DSA to sharpen my problem-solving edge.
+              </p>
+              <p className="text-base text-gray-400 font-sans max-w-xs leading-relaxed text-[16.5px] text-center mt-2">
+                I enjoy merging creativity with logic—blending code with thoughtful design to bring bold ideas to life. Outside of development, I’m drawn to innovation, product design, and the challenge of building solutions that actually make a difference.
+              </p>
+            </div>
+            {/* Social Icons - Inline Centered */}
+            <div className="flex flex-row items-center gap-6 text-gray-200 text-2xl font-sans mt-17 justify-center">
               {socials.map((s) => (
                 <a
                   key={s.label}
@@ -244,28 +264,83 @@ export default function AboutPage() {
               ))}
             </div>
           </div>
-          {/* Center dot */}
-          <div className="mx-0 md:mx-20 flex flex-col items-center">
-            <span className="block w-8 h-8   border-lime-400 flex items-center justify-center">
-              {/* <span className="block w-2 h-2 rounded-full bg-lime-400"></span> */}
-            </span>
-          </div>
-          {/* Right: Text */}
-          <div className="flex-1 flex flex-col justify-center items-start z-10 mb-0">
-            <h1 className="text-2xl md:text-3xl font-light text-white mb-2">
-              Hello, I'm <span className="font-semibold">Kavya</span>
-            </h1>
-            <h2 className="text-3xl md:text-4xl font-light mb-8" style={{ color: "#D8FF3E" }}>
-              Full Stack Developer 
-            </h2>
-            <div className="w-10 border-t border-[#444] mb-2" />
-            <p className="text-base md:text-lg text-gray-400 font-sans max-w-xl leading-relaxed">
-              I'm a Full Stack Developer with a passion for crafting intuitive, responsive, and scalable web applications. I love working across the stack—from designing clean, functional UIs to architecting robust backend systems. I’m always curious and constantly experimenting, whether it’s building smart IoT integrations, exploring Flutter + Firebase ecosystems, or diving deeper into DSA to sharpen my problem-solving edge.
-              <br />
-              <span style={{ display: "inline-block", marginTop: "0.9em" }}>
-                I enjoy merging creativity with logic—blending code with thoughtful design to bring bold ideas to life. Outside of development, I’m drawn to innovation, product design, and the challenge of building solutions that actually make a difference.
+          {/* Desktop view: original layout */}
+          <div className="hidden md:flex flex-row items-center justify-center w-full max-w-6xl z-10">
+            {/* Left: Layered image cards */}
+            <div className="relative group flex-shrink-0" style={{ width: 340, height: 380 }}>
+              {/* Layered effect */}
+              {[4, 3, 2, 1].map((i) => (
+                <div
+                  key={i}
+                  className={`absolute transition-transform duration-300`}
+                  style={{
+                    left: i * 8,
+                    top: i * 8,
+                    width: 300,
+                    height: 340,
+                    border: "1px solid #232323",
+                    borderRadius: "8px",
+                    zIndex: i,
+                    background: "transparent",
+                  }}
+                />
+              ))}
+              {/* Main card */}
+              <div
+                className="relative overflow-hidden rounded-lg shadow-lg transition-transform duration-300 group-hover:-translate-y-2 group-hover:shadow-2xl"
+                style={{
+                  width: 300,
+                  height: 340,
+                  background: "#D8FF3E",
+                  zIndex: 10,
+                }}
+              >
+                <img
+                  src="/kavya2.jpg"
+                  alt="Profile"
+                  className="w-full h-full object-cover object-center grayscale"
+                  draggable={false}
+                />
+              </div>
+              {/* Socials row under the picture */}
+              <div className="flex flex-row items-center gap-6 text-gray-200 text-2xl font-sans mt-20 justify-center">
+                {socials.map((s) => (
+                  <a
+                    key={s.label}
+                    href={s.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="hover:text-white transition-colors"
+                    aria-label={s.label}
+                  >
+                    {s.icon}
+                  </a>
+                ))}
+              </div>
+            </div>
+            {/* Center dot */}
+            <div className="mx-20 flex flex-col items-center">
+              <span className="block w-8 h-8   border-lime-400 flex items-center justify-center">
+                {/* <span className="block w-2 h-2 rounded-full bg-lime-400"></span> */}
               </span>
-            </p>
+            </div>
+            {/* Right: Text */}
+            <div className="flex-1 flex flex-col justify-center items-start z-10 mb-25">
+              <h1 className="text-3xl md:text-4xl font-light text-white mb-2">
+                Hello, I'm <span className="font-semibold">Kavya</span>
+              </h1>
+              <h2 className="text-4xl md:text-5xl font-light mb-8" style={{ color: "#D8FF3E" }}>
+                Full Satck Developer 
+              </h2>
+              <div className="w-10 border-t border-[#444] mb-2" />
+              <p className="text-lg md:text-xl text-gray-400 font-sans max-w-xl leading-relaxed">
+                I'm a Full Stack Developer with a passion for crafting intuitive, responsive, and scalable web applications. I love working across the stack—from designing clean, functional UIs to architecting robust backend systems. I’m always curious and constantly experimenting, whether it’s building smart IoT integrations, exploring Flutter + Firebase ecosystems, or diving deeper into DSA to sharpen my problem-solving edge.
+                <br />
+                <span style={{ display: "inline-block", marginTop: "0.9em" }}>
+                  I enjoy merging creativity with logic—blending code with thoughtful design to bring bold ideas to life. Outside of development, I’m drawn to innovation, product design, and the challenge of building solutions that actually make a difference.
+                </span>
+              </p>
+            </div>
           </div>
         </div>
       </motion.div>

@@ -24,8 +24,9 @@ export default function Navbar() {
             flex flex-row space-x-4 md:space-x-8
             mt-2 pointer-events-auto
             ml-0 md:ml-0
-            mr-8 md:mr-8
-            justify-end
+            mr-2 md:mr-12
+            justify-end md:justify-end
+            w-auto md:w-full
           "
         >
           <Link

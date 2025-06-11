@@ -263,7 +263,7 @@ export default function SkillsPage() {
       <FastMolecularBg />
       {/* "Skills" text at top */}
       <span
-        className="z-10 text-[5rem] font-extrabold text-[#ffff] opacity-50 select-none pointer-events-none absolute top-2 left-1/2 -translate-x-1/2"
+        className="z-10 text-[4rem] mt-7 font-extrabold text-[#ffff] opacity-50 select-none pointer-events-none absolute top-2 left-1/2 -translate-x-1/2"
         style={{
           fontFamily: "'Fira Mono', 'Consolas', monospace",
           letterSpacing: "-0.05em",
@@ -282,39 +282,39 @@ export default function SkillsPage() {
       </button> */}
 
       {/* Cards */}
-      <div className="relative z-10 mt-8 flex flex-col md:flex-row items-center justify-center gap-8 md:gap-16 mt-2 w-full px-2">
-        {/* Software Developer Card */}
+      <div className="relative z-10 mt-22 flex flex-col items-center justify-center gap-6 md:flex-row md:gap-16 mt-2 w-full px-2">
+        {/* Backend Developer Card */}
         <div
-          className="group bg-white border-2 border-black rounded-md shadow-lg p-5 md:p-8 w-full max-w-xs md:w-[430px] md:h-[520px] flex flex-col transition duration-200 hover:bg-gray-200/70 hover:shadow-none"
+          className="group bg-white border-2 border-black rounded-xl shadow-lg p-5 xs:p-6 md:p-8 w-full max-w-[340px] md:max-w-[430px] h-[420px] md:h-[520px] flex flex-col items-center transition duration-200 hover:bg-gray-200/70 hover:shadow-none"
           style={{
             fontFamily: "'Fira Mono', 'Consolas', monospace",
             boxShadow: "0 2px 8px 0 rgba(0,0,0,0.10)",
           }}
         >
-          <div className="flex items-center gap-2 mb-4">
-            <span className="text-3xl">💻</span>
-            <span className="text-2xl font-bold" style={{ fontFamily: "inherit" }}>
+          <div className="flex items-center gap-3 mb-3">
+            <span className="text-3xl xs:text-4xl md:text-4xl">💻</span>
+            <span className="text-lg xs:text-xl md:text-2xl font-bold" style={{ fontFamily: "inherit" }}>
               Backend Developer
             </span>
           </div>
-          <p className="mb-6 text-xl" style={{ fontFamily: "inherit" }}>
+          <p className="mb-4 text-base xs:text-lg md:text-lg text-center" style={{ fontFamily: "inherit" }}>
             I design the unseen to make everything seen work better.
           </p>
-          <div className="mb-4">
-            <span className="font-bold text-xl" style={{ fontFamily: "inherit" }}>
+          <div className="mb-3 w-full">
+            <span className="font-bold text-base xs:text-lg md:text-xl" style={{ fontFamily: "inherit" }}>
               I LIKE TO CODE IN
             </span>
-            <pre className="mt-1 text-lg whitespace-pre-wrap" style={{ fontFamily: "inherit" }}>
+            <pre className="mt-1 text-sm xs:text-base md:text-lg whitespace-pre-wrap" style={{ fontFamily: "inherit" }}>
   Java, Javascript, Node, Express
   MySQL, Spring, C, Rest API,
   MongoDB &amp; Dart
             </pre>
           </div>
-          <div>
-            <span className="font-bold text-xl" style={{ fontFamily: "inherit" }}>
+          <div className="w-full">
+            <span className="font-bold text-base xs:text-lg md:text-xl" style={{ fontFamily: "inherit" }}>
               TOOLS
             </span>
-            <ul className="list-disc ml-8 mb-2 text-lg" style={{ fontFamily: "inherit" }}>
+            <ul className="list-disc ml-6 mb-2 text-sm xs:text-base md:text-lg" style={{ fontFamily: "inherit" }}>
               <li>VS Code</li>
               <li>Android Studio</li>
               <li>Postman API</li>
@@ -327,35 +327,35 @@ export default function SkillsPage() {
 
         {/* Frontend Developer Card */}
         <div
-          className="group bg-white border-2 border-black rounded-md shadow-lg p-5 md:p-8 w-full max-w-xs md:w-[430px] md:h-[520px] flex flex-col transition duration-200 hover:bg-gray-200/70 hover:shadow-none"
+          className="group bg-white border-2 border-black rounded-xl shadow-lg p-5 xs:p-6 md:p-8 w-full max-w-[340px] md:max-w-[430px] h-[420px] md:h-[520px] flex flex-col items-center transition duration-200 hover:bg-gray-200/70 hover:shadow-none"
           style={{
             fontFamily: "'Fira Mono', 'Consolas', monospace",
             boxShadow: "0 2px 8px 0 rgba(10, 10, 10, 0.1)",
           }}
         >
-          <div className="flex items-center gap-2 mb-4">
-            <span className="text-3xl">🎨</span>
-            <span className="text-2xl font-bold" style={{ fontFamily: "inherit" }}>
+          <div className="flex items-center gap-3 mb-3">
+            <span className="text-3xl xs:text-4xl md:text-4xl">🎨</span>
+            <span className="text-lg xs:text-xl md:text-2xl font-bold" style={{ fontFamily: "inherit" }}>
               Frontend Developer
             </span>
           </div>
-          <p className="mb-6 text-xl" style={{ fontFamily: "inherit" }}>
+          <p className="mb-4 text-base xs:text-lg md:text-lg text-center" style={{ fontFamily: "inherit" }}>
             I code the canvas<br />your users interact with.
           </p>
-          <div className="mb-4">
-            <span className="font-bold text-xl" style={{ fontFamily: "inherit" }}>
+          <div className="mb-3 w-full">
+            <span className="font-bold text-base xs:text-lg md:text-xl" style={{ fontFamily: "inherit" }}>
               SKILLS
             </span>
-            <pre className="mt-1 text-lg whitespace-pre-wrap" style={{ fontFamily: "inherit" }}>
+            <pre className="mt-1 text-sm xs:text-base md:text-lg whitespace-pre-wrap" style={{ fontFamily: "inherit" }}>
   Html, Css, Js, React,
   Redux, Bootstrap, Tailwind CSS, Firebase, Flutter
             </pre>
           </div>
-          <div>
-            <span className="font-bold text-xl" style={{ fontFamily: "inherit" }}>
+          <div className="w-full">
+            <span className="font-bold text-base xs:text-lg md:text-xl" style={{ fontFamily: "inherit" }}>
               TOOLS
             </span>
-            <pre className="mt-1 text-lg whitespace-pre-wrap" style={{ fontFamily: "inherit" }}>
+            <pre className="mt-1 text-sm xs:text-base md:text-lg whitespace-pre-wrap" style={{ fontFamily: "inherit" }}>
   VScode, Figma, Github, Vercel.
             </pre>
           </div>
@@ -363,7 +363,7 @@ export default function SkillsPage() {
       </div>
 
       {/* Socials horizontal bar at center bottom */}
-      <div className="absolute left-1/2 bottom-4 md:bottom-8 transform -translate-x-1/2 flex flex-row items-center gap-6 md:gap-8 text-gray-200 text-xl md:text-2xl font-sans z-20">
+      <div className="absolute left-1/2 bottom-5 transform -translate-x-1/2 flex flex-row items-center gap-8 text-gray-200 text-2xl font-sans z-20">
         {socials.map((s) => (
           <a
             key={s.label}

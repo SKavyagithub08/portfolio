@@ -81,31 +81,31 @@ function ProjectCard({ project }) {
 
 	return (
 		<div
-			className="flex-shrink-0 mb-9 w-[240px] min-h-[340px] perspective scroll-snap-align-start"
+			className="flex-shrink-0 mb-9 w-[300px] min-h-[390px] md:w-[240px] md:min-h-[340px] perspective scroll-snap-align-start"
 			style={{ perspective: "1200px", scrollSnapAlign: "start" }}
 			onTouchStart={handleTouch}
 		>
 			<div
-				className={`relative w-full min-h-[340px] h-full transition-transform duration-500 transform-style-preserve-3d ${flipped ? "rotate-y-180" : ""}`}
+				className={`relative w-full min-h-[390px] md:min-h-[340px] h-full transition-transform duration-500 transform-style-preserve-3d ${flipped ? "rotate-y-180" : ""}`}
 				style={{ transformStyle: "preserve-3d" }}
 				onMouseEnter={() => setFlipped(true)}
 				onMouseLeave={() => setFlipped(false)}
 			>
 				{/* Front */}
 				<div
-					className="absolute w-full min-h-[340px] h-full bg-[#faf7f6] flex flex-col items-center justify-start shadow-2xl px-5 pt-6 pb-4 text-center cursor-pointer border border-white transition-transform duration-200 hover:scale-105 hover:-translate-y-1"
+					className="absolute w-full min-h-[390px] md:min-h-[340px] h-full bg-[#faf7f6] flex flex-col items-center justify-start shadow-2xl px-6 pt-7 pb-5 text-center cursor-pointer border border-white transition-transform duration-200 hover:scale-105 hover:-translate-y-1"
 					style={{
 						backfaceVisibility: "hidden",
 						clipPath,
 						boxShadow: "0 8px 32px 0 rgba(0,0,0,0.10)",
 					}}
 				>
-					<h2 className="text-lg md:text-xl font-bold mb-2 mt-0">{project.name}</h2>
-					<p className="text-xs md:text-sm text-black font-normal flex-1">{project.description}</p>
+					<h2 className="text-xl md:text-xl font-bold mb-5 mt-0">{project.name}</h2>
+					<p className="text-[16px] md:text-sm text-black font-normal flex-1">{project.description}</p>
 				</div>
 				{/* Back */}
 				<div
-					className="absolute w-full min-h-[340px] h-full bg-black flex flex-col items-center justify-between shadow-2xl px-4 pt-6 pb-4 text-center rotate-y-180 border border-white transition-transform duration-200 hover:scale-105 hover:-translate-y-1"
+					className="absolute w-full min-h-[390px] md:min-h-[340px] h-full bg-black flex flex-col items-center justify-between shadow-2xl px-5 pt-7 pb-5 text-center rotate-y-180 border border-white transition-transform duration-200 hover:scale-105 hover:-translate-y-1"
 					style={{
 						backfaceVisibility: "hidden",
 						color: "#fff",
@@ -117,7 +117,7 @@ function ProjectCard({ project }) {
 					<img
 						src={project.image}
 						alt={project.name}
-						className="w-full h-28 object-cover rounded-xl mb-2 border border-gray-800"
+						className="w-full h-32 object-cover rounded-xl mb-3 border border-gray-800"
 					/>
 					{/* Horizontal line */}
 					<hr className="w-full border-t border-white opacity-80 my-2" />
@@ -127,7 +127,7 @@ function ProjectCard({ project }) {
 							? project.tags
 							: ["#Tag"])
 							.map((tag, idx) => (
-								<span key={idx} className="text-white text-xs font-light">{tag}</span>
+								<span key={idx} className="text-white text-m font-light">{tag}</span>
 							))}
 					</div>
 					{/* Visit and GitHub row */}
@@ -136,7 +136,7 @@ function ProjectCard({ project }) {
 							href={project.visit}
 							target="_blank"
 							rel="noopener noreferrer"
-							className="flex items-center bg-[#faf7f6] text-black text-base font-normal px-5 py-1.5 rounded-l-full rounded-tr-[0.5rem] rounded-br-[0.5rem] shadow hover:bg-gray-200 transition min-w-[80px] justify-center"
+							className="flex items-center bg-[#faf7f6] text-black text-base font-normal px-6 py-2 rounded-l-full rounded-tr-[0.5rem] rounded-br-[0.5rem] shadow hover:bg-gray-200 transition min-w-[90px] justify-center"
 							style={{
 								borderTopRightRadius: "0.5rem",
 								borderBottomRightRadius: "0.5rem",
@@ -150,10 +150,10 @@ function ProjectCard({ project }) {
 							href={project.github}
 							target="_blank"
 							rel="noopener noreferrer"
-							className="ml-3 flex items-center justify-center w-8 h-8 rounded-full bg-white text-black shadow border border-white hover:bg-gray-100 transition"
+							className="ml-3 flex items-center justify-center w-9 h-9 rounded-full bg-white text-black shadow border border-white hover:bg-gray-100 transition"
 							aria-label="GitHub"
 						>
-							<FaGithub size={18} />
+							<FaGithub size={22} />
 						</a>
 					</div>
 				</div>
@@ -226,7 +226,7 @@ export default function ProjectsPage() {
 			>
 				{/* Projects horizontal carousel */}
 				<div className="flex-1 flex flex-col items-center justify-center px-4 py-16">
-					<h1 className="text-[8vw] md:text-[5vw] font-extrabold text-white opacity-50 absolute top-8 left-1/2 -translate-x-1/2 pointer-events-none select-none z-0" style={{ letterSpacing: "-0.05em" }}>
+					<h1 className="text-[10vw] md:text-[5vw] font-extrabold text-white opacity-50 absolute left-1/2 -translate-x-1/2 pointer-events-none select-none z-0 top-37 md:top-8" style={{ letterSpacing: "-0.05em" }}>
 						MY WORK
 					</h1>
 					<div className="relative z-10 w-full max-w-7xl mt-24">
