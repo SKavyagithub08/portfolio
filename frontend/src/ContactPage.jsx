@@ -118,7 +118,8 @@ export default function ContactPage({ onClose }) {
     e.preventDefault();
     setStatus("");
     try {
-      const res = await fetch("https://portfolio-1-4awf.onrender.com/contact", {
+      const apiBase = process.env.REACT_APP_API_BASE_URL || "";
+      const res = await fetch(`${apiBase}/contact`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ name, email, message }),
