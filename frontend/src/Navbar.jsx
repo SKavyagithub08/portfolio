@@ -7,19 +7,27 @@ export default function Navbar() {
   const isHome = location.pathname === "/";
 
   return (
-    <div className="fixed top-4 left-1 z-50 w-full flex items-center justify-between px-0 pt-0 bg-transparent pointer-events-none">
+    <div className="fixed top-3 md:top-4 left-0.5 md:left-8 z-50 w-full flex items-center justify-between px-0 pt-0 bg-transparent pointer-events-none">
       <div className="pointer-events-auto">
         <Link to="/" aria-label="Home">
           <img
             src="/logo.png"
             alt="Logo"
-            className="h-20 w-20 object-contain"
+            className="h-20 w-20 md:h-20 md:w-20 object-contain"
             style={{ minWidth: 56 }}
           />
         </Link>
       </div>
       {isHome && (
-        <nav className="flex space-x-8 mr-8 mt-2 pointer-events-auto">
+        <nav
+          className="
+            flex flex-row space-x-4 md:space-x-8
+            mt-2 pointer-events-auto
+            ml-0 md:ml-0
+            mr-8 md:mr-8
+            justify-end
+          "
+        >
           <Link
             to="/"
             className=

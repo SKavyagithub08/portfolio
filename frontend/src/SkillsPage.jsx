@@ -282,10 +282,10 @@ export default function SkillsPage() {
       </button> */}
 
       {/* Cards */}
-      <div className="relative z-10 mt-8 flex flex-col md:flex-row items-center justify-center gap-16 mt-2">
+      <div className="relative z-10 mt-8 flex flex-col md:flex-row items-center justify-center gap-8 md:gap-16 mt-2 w-full px-2">
         {/* Software Developer Card */}
         <div
-          className="group bg-white border-2 border-black rounded-md shadow-lg p-8 w-[430px] h-[520px] flex flex-col transition duration-200 hover:bg-gray-200/70 hover:shadow-none"
+          className="group bg-white border-2 border-black rounded-md shadow-lg p-5 md:p-8 w-full max-w-xs md:w-[430px] md:h-[520px] flex flex-col transition duration-200 hover:bg-gray-200/70 hover:shadow-none"
           style={{
             fontFamily: "'Fira Mono', 'Consolas', monospace",
             boxShadow: "0 2px 8px 0 rgba(0,0,0,0.10)",
@@ -327,7 +327,7 @@ export default function SkillsPage() {
 
         {/* Frontend Developer Card */}
         <div
-          className="group bg-white border-2 border-black rounded-md shadow-lg p-8 w-[430px] h-[520px] flex flex-col transition duration-200 hover:bg-gray-200/70 hover:shadow-none"
+          className="group bg-white border-2 border-black rounded-md shadow-lg p-5 md:p-8 w-full max-w-xs md:w-[430px] md:h-[520px] flex flex-col transition duration-200 hover:bg-gray-200/70 hover:shadow-none"
           style={{
             fontFamily: "'Fira Mono', 'Consolas', monospace",
             boxShadow: "0 2px 8px 0 rgba(10, 10, 10, 0.1)",
@@ -363,7 +363,7 @@ export default function SkillsPage() {
       </div>
 
       {/* Socials horizontal bar at center bottom */}
-      <div className="absolute left-1/2 bottom-8 transform -translate-x-1/2 flex flex-row items-center gap-8 text-gray-200 text-2xl font-sans z-20">
+      <div className="absolute left-1/2 bottom-4 md:bottom-8 transform -translate-x-1/2 flex flex-row items-center gap-6 md:gap-8 text-gray-200 text-xl md:text-2xl font-sans z-20">
         {socials.map((s) => (
           <a
             key={s.label}

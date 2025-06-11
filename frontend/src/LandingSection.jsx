@@ -199,10 +199,20 @@ export default function LandingSection() {
       <section className="min-h-[85vh] h-[85vh] bg-black text-white flex flex-col relative overflow-hidden">
         {/* High-speed molecular animated background (same as SkillsPage) */}
         <FastMolecularBg />
-        {/* Main identity row at bottom */}
-        <div className="flex items-end justify-between w-full px-8 pb-[10vh] flex-1 z-10">
+        {/* Main identity row */}
+        <div
+          className="
+            flex flex-col items-center justify-center
+            md:flex-row md:items-end md:justify-between
+            w-full px-4 md:px-8
+            pb-0 md:pb-[10vh]
+            flex-1 z-10
+            text-center md:text-left
+          "
+          style={{ minHeight: "0" }}
+        >
           <div>
-            <h1 className="text-[10vw] md:text-[7vw] font-bold uppercase tracking-tight leading-none flex">
+            <h1 className="text-[10vw] md:text-[7vw] font-bold uppercase tracking-tight leading-none flex justify-center md:justify-start">
               {name.split("").map((char, i) => (
                 <motion.span
                   key={i}
@@ -220,7 +230,7 @@ export default function LandingSection() {
               ))}
             </h1>
             <motion.span
-              className="text-xl text-gray-400 font-sans mt-1 ml-2 block"
+              className="text-xl text-gray-400 font-sans mt-1 ml-0 md:ml-2 block"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.5, duration: 0.4, type: "spring" }}
@@ -228,9 +238,10 @@ export default function LandingSection() {
               Full Stack Developer & Designer
             </motion.span>
           </div>
+          {/* Desktop (md+) inline button */}
           <NavLink
             to="/contact"
-            className="flex items-center text-white text-s font-normal transition-colors duration-200 hover:text-gray-300 cursor-pointer bg-transparent border-none outline-none pointer-events-auto"
+            className="hidden md:flex items-center text-white text-s font-normal transition-colors duration-200 hover:text-gray-300 cursor-pointer bg-transparent border-none outline-none pointer-events-auto mt-6 md:mt-0"
             style={{ padding: 0, background: "none" }}
           >
             <motion.span
@@ -308,11 +319,18 @@ export default function LandingSection() {
           }}
         />
         {/* Project 1 */}
-        <div className="relative w-full h-[48vh] max-h-[480px] flex items-center justify-center overflow-hidden group cursor-pointer">
+        <div className="relative w-full h-[28vh] md:h-[48vh] max-h-[240px] md:max-h-[480px] flex items-center justify-center overflow-hidden group cursor-pointer">
           <img
             src="/project2.jpg"
             alt="Project 2"
             className="absolute inset-0 w-full h-full object-cover"
+            style={{
+              width: "100%",
+              height: "100%",
+              objectFit: "cover",
+              objectPosition: "center",
+              maxHeight: "100%",
+            }}
           />
           <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10 flex flex-col items-center justify-center w-full h-full">
             <span className="text-4xl md:text-5xl font-light text-white mb-2">
@@ -324,11 +342,18 @@ export default function LandingSection() {
           </div>
         </div>
         {/* Project 2 */}
-        <div className="relative w-full h-[48vh] max-h-[480px] flex items-center justify-center overflow-hidden group cursor-pointer">
+        <div className="relative w-full h-[28vh] md:h-[48vh] max-h-[240px] md:max-h-[480px] flex items-center justify-center overflow-hidden group cursor-pointer">
           <img
             src="/project3.png"
             alt="Project 1"
             className="absolute inset-0 w-full h-full object-cover"
+            style={{
+              width: "100%",
+              height: "100%",
+              objectFit: "cover",
+              objectPosition: "center",
+              maxHeight: "100%",
+            }}
           />
           <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10 flex flex-col items-center justify-center w-full h-full">
             <span className="text-4xl md:text-5xl font-light text-white mb-2">
@@ -370,11 +395,70 @@ export default function LandingSection() {
       <section
         id="about"
         ref={aboutRef}
-        className="w-full flex flex-row items-center justify-between bg-black border-t border-gray-700 py-16 px-8 min-h-[60vh]"
-        style={{ minHeight: "60vh" }}
+        className="w-full bg-black border-t border-gray-700 py-8 md:py-12 px-3 md:px-8 min-h-[40vh] flex flex-col md:flex-row items-center md:items-center justify-between"
+        style={{ minHeight: "40vh" }}
       >
-        {/* Left: Text */}
-        <div className="flex-1 flex flex-col justify-center max-w-[60%]">
+        {/* Mobile view: Centered circular image, text, button, socials */}
+        <div className="flex flex-col items-center w-full md:hidden">
+          {/* Image Centered - Circular */}
+          <div className="w-[110px] h-[110px] bg-gray-800 rounded-full overflow-hidden flex items-center justify-center mb-2 mx-auto">
+            <img
+              src="/kavya2.jpg"
+              alt="kavya"
+              className="object-cover w-full h-full"
+            />
+          </div>
+          {/* Text Centered */}
+          <span className="text-xl font-semibold text-gray-300 font-sans mb-2 text-center">
+            Hello, I'm Kavya
+          </span>
+          <span
+            className="text-base font-light text-white leading-tight mb-4 text-center"
+            style={{ lineHeight: 1.2, wordBreak: "keep-all", whiteSpace: "normal" }}
+          >
+            "Helping businesses showcase their value to the world through strategic and timeless design."
+          </span>
+          <NavLink
+            to="/about"
+            className="mx-auto text-base text-gray-200 font-sans hover:text-white transition-colors flex items-center gap-1 w-fit justify-center bg-gray-800 rounded-full px-5 py-1.5"
+          >
+            Learn more
+            <svg
+              className="w-4 h-4 mt-0.5"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.5"
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M5 12h14m-4-4 4 4-4 4"
+              />
+            </svg>
+          </NavLink>
+          {/* Social Icons Centered */}
+          <div className="flex flex-row items-center gap-5 text-gray-200 text-2xl md:text-2xl font-sans mt-5 justify-center">
+            {socials.map((s) => (
+              <a
+                key={s.label}
+                href={s.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-white transition-colors"
+                aria-label={s.label}
+                style={{
+                  fontSize: "1.5rem", // slightly larger for mobile
+                }}
+              >
+                {s.icon}
+              </a>
+            ))}
+          </div>
+        </div>
+        {/* Desktop view: original layout */}
+        <div className="hidden md:flex flex-1 flex-col justify-center max-w-[60%]">
           <span className="text-2xl font-semibold text-gray-300 font-sans mb-4">
             Hello, I'm Kavya
           </span>
@@ -409,8 +493,7 @@ export default function LandingSection() {
             </svg>
           </NavLink>
         </div>
-        {/* Right: Image and Socials */}
-        <div className="flex flex-col items-center min-w-[260px]">
+        <div className="hidden md:flex flex-col items-center min-w-[260px]">
           <div className="w-[270px] h-[340px] bg-gray-800 rounded-sm overflow-hidden mb-6 flex items-center justify-center">
             <img
               src="/kavya2.jpg"
@@ -449,7 +532,7 @@ export default function LandingSection() {
             <span className="block text-lg text-gray-300 font-sans mb-6">
               CONTACT
             </span>
-            <h2 className="text-[2.5rem] md:text-[3rem] font-light text-white mb-8 leading-tight font-sans">
+            <h2 className="text-xl md:text-[2.5rem] lg:text-[3rem] font-light text-white mb-5 leading-tight font-sans">
               I&apos;d love to work together!
             </h2>
             <div className="flex flex-col gap-2">

@@ -191,9 +191,9 @@ export default function AboutPage() {
             ))}
           </svg>
         </div>
-        <div className="flex flex-row items-center justify-center w-full max-w-6xl z-10">
+        <div className="flex flex-col md:flex-row items-center justify-center w-full max-w-6xl z-10 gap-10 md:gap-0">
           {/* Left: Layered image cards */}
-          <div className="relative group flex-shrink-0" style={{ width: 340, height: 380 }}>
+          <div className="relative group flex-shrink-0 mb-8 md:mb-0" style={{ width: 220, height: 260 }}>
             {/* Layered effect */}
             {[4, 3, 2, 1].map((i) => (
               <div
@@ -215,8 +215,8 @@ export default function AboutPage() {
             <div
               className="relative overflow-hidden rounded-lg shadow-lg transition-transform duration-300 group-hover:-translate-y-2 group-hover:shadow-2xl"
               style={{
-                width: 300,
-                height: 340,
+                width: 180,
+                height: 220,
                 background: "#D8FF3E",
                 zIndex: 10,
               }}
@@ -229,7 +229,7 @@ export default function AboutPage() {
               />
             </div>
             {/* Socials row under the picture */}
-            <div className="flex flex-row items-center gap-6 text-gray-200 text-2xl font-sans mt-20 justify-center">
+            <div className="flex flex-row items-center gap-4 md:gap-6 text-gray-200 text-xl md:text-2xl font-sans mt-10 md:mt-20 justify-center">
               {socials.map((s) => (
                 <a
                   key={s.label}
@@ -245,21 +245,21 @@ export default function AboutPage() {
             </div>
           </div>
           {/* Center dot */}
-          <div className="mx-20 flex flex-col items-center">
+          <div className="mx-0 md:mx-20 flex flex-col items-center">
             <span className="block w-8 h-8   border-lime-400 flex items-center justify-center">
               {/* <span className="block w-2 h-2 rounded-full bg-lime-400"></span> */}
             </span>
           </div>
           {/* Right: Text */}
-          <div className="flex-1 flex flex-col justify-center items-start z-10 mb-25">
-            <h1 className="text-3xl md:text-4xl font-light text-white mb-2">
+          <div className="flex-1 flex flex-col justify-center items-start z-10 mb-0">
+            <h1 className="text-2xl md:text-3xl font-light text-white mb-2">
               Hello, I'm <span className="font-semibold">Kavya</span>
             </h1>
-            <h2 className="text-4xl md:text-5xl font-light mb-8" style={{ color: "#D8FF3E" }}>
-              Full Satck Developer 
+            <h2 className="text-3xl md:text-4xl font-light mb-8" style={{ color: "#D8FF3E" }}>
+              Full Stack Developer 
             </h2>
             <div className="w-10 border-t border-[#444] mb-2" />
-            <p className="text-lg md:text-xl text-gray-400 font-sans max-w-xl leading-relaxed">
+            <p className="text-base md:text-lg text-gray-400 font-sans max-w-xl leading-relaxed">
               I'm a Full Stack Developer with a passion for crafting intuitive, responsive, and scalable web applications. I love working across the stack—from designing clean, functional UIs to architecting robust backend systems. I’m always curious and constantly experimenting, whether it’s building smart IoT integrations, exploring Flutter + Firebase ecosystems, or diving deeper into DSA to sharpen my problem-solving edge.
               <br />
               <span style={{ display: "inline-block", marginTop: "0.9em" }}>
